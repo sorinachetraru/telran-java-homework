@@ -1,11 +1,11 @@
 public class Homework8 {
     public static void main(String[] args) {
-        // showDivisorOf7();
-        // showDivisorOf3And5();
-        // sumPerfectSquares();
-        // sumSmallerNumbers (6);
-        int frequency = getCharacterFrequency("hello", 'l');
-        System.out.println(frequency);
+        showDivisorOf7();
+        showDivisorOf3And5();
+        sumPerfectSquares();
+        sumSmallerNumbers (6);
+        System.out.println(getCharacterFrequency("hello", 'l'));
+        System.out.println(romanToDecimal ("XXIV"));
     }
 
     // Напишите программу, которая выводит на экран все числа от 1 до 100, кратные 7.
@@ -74,5 +74,48 @@ public class Homework8 {
         }
 
         return frequency;
+    }
+
+    // *simple
+    private static int romanToDecimal(String romanNumeral) {
+        int prevDecimal = 0;
+        int currentDecimal = 0;
+        int sum = 0;
+
+        for (int i = romanNumeral.length() - 1; i >= 0; i--) {
+            char currentRomanSymbol = romanNumeral.charAt(i);
+            currentDecimal = romanSymbolToInt(currentRomanSymbol);
+
+            if (currentDecimal < prevDecimal) {
+                sum = sum - currentDecimal;
+            } else {
+                sum = sum + currentDecimal;
+            }
+
+            prevDecimal = currentDecimal;
+        }
+
+        return sum;
+    }
+
+    private static int romanSymbolToInt(char romanSymbol){
+        switch (romanSymbol) {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return 0; // ignore invalid symbol
+        }
     }
 }
